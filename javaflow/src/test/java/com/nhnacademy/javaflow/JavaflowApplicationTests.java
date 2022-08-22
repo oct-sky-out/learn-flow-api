@@ -15,12 +15,8 @@ class JavaflowApplicationTests {
 				.onSubscribe(new MySubscription(subscriber, "NHN Acacdemy A Class"));
 
 		MySubscriber subscriber1 = new MySubscriber();
-		MySubscriber subscriber2 = new MySubscriber();
-		MySubscriber subscriber3 = new MySubscriber();
 
-		myRoomTempPublisher.subscribe(subscriber2);
 		myRoomTempPublisher.subscribe(subscriber1);
-		myRoomTempPublisher.subscribe(subscriber3);
 	}
 
 	@Test
@@ -31,7 +27,7 @@ class JavaflowApplicationTests {
 
 	@Test
 	public void test3() {
-		MyReactor myReactor = new MyReactor();
-		myReactor.tempRecator();
+		MyReactor myReactor1 = new MyReactor();
+		myReactor1.tempRecator();
 	}
 }

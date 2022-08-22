@@ -1,19 +1,13 @@
 package com.nhnacademy.javaflow.reactor.subscription;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 import java.util.stream.LongStream;
-
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
-
 import com.nhnacademy.javaflow.data.MyRoomTemp;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class MyReactorSubscription implements Subscription {
-    private static final ExecutorService EXECUTOR_SERVICE = Executors.newFixedThreadPool(3);
     private final Subscriber<? super MyRoomTemp> subscriber;
     private final String roomName;
 
@@ -29,7 +23,7 @@ public class MyReactorSubscription implements Subscription {
 
     @Override
     public void request(long n) {
-        EXECUTOR_SERVICE.submit(() -> measureMyRoomTemp(n));
+        measureMyRoomTemp(n);
     }
 
     private void measureMyRoomTemp(long n) {

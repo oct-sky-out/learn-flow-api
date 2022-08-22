@@ -26,11 +26,13 @@ public class MySubscription implements Subscription {
 
     @Override
     public void request(long n) {
-        if (n > 10) {
-            // 반드시 request의 요청 수 n 이하의 요청의 수만 처리 가능하다. (Flow API 규약)
-            subscriber.onError(new RuntimeException("최대 처리 요청은 10입니다."));
+        // 반드시 request의 요청 수 n 이하의 요청의 수만 처리 가능하다.
+        // 여기서는 long type이니, 사실은 거의 무한에 가깝다고 표현 할 수 있다.
+        // https://docs.oracle.com/javase/9/docs/api/java/util/concurrent/Flow.Subscription.html#request-long-
+        if (n <= 0) {
+            subscriber.onError(new RuntimeException("처리 할 데이터 수는 하나 이상이어야합니다."));
+            return;
         }
-
         EXECUTOR_SERVICE.submit(() -> measureMyRoomTemp(n));
     }
 
